@@ -80,10 +80,12 @@ function handleNoClick() {
     
     clickCount++;
     
-    // Crecimiento exponencial del botón Si hasta abarcar toda la pantalla en el click 10
-    const growthFactor = Math.pow(2, clickCount / 2); // Crecimiento exponencial
-    yesButton.style.fontSize = `${1.5 * growthFactor}em`;
-    yesButton.style.padding = `${10 * growthFactor}px ${20 * growthFactor}px`;
+    // Solo después de mostrar todos los mensajes, el botón crecerá exponencialmente
+    if (clickCount > messages.length) {
+        const growthFactor = Math.pow(2, (clickCount - messages.length) / 1.5); // Crecimiento exponencial
+        yesButton.style.fontSize = `${1.5 * growthFactor}em`;
+        yesButton.style.padding = `${10 * growthFactor}px ${20 * growthFactor}px`;
+    }
 }
 
 function handleYesClick() {
