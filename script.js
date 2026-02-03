@@ -80,12 +80,10 @@ function handleNoClick() {
     
     clickCount++;
     
-    // Crecimiento exponencial solo después de pasar el último mensaje
-    if (clickCount > messages.length) {
-        const growthFactor = Math.pow(3, clickCount - messages.length); // Crecimiento exponencial fuerte
-        yesButton.style.fontSize = `${1.5 * growthFactor}em`;
-        yesButton.style.padding = `${10 * growthFactor}px ${20 * growthFactor}px`;
-    }
+    // Crecimiento exponencial desde el primer click
+    const growthFactor = Math.pow(2.5, clickCount); // Crecimiento exponencial fuerte
+    yesButton.style.fontSize = `${1.5 * growthFactor}em`;
+    yesButton.style.padding = `${10 * growthFactor}px ${20 * growthFactor}px`;
 }
 
 function handleYesClick() {
