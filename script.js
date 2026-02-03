@@ -67,6 +67,7 @@ const messages = [
 ];
 
 let messageIndex = 0;
+let clickCount = 0;
 
 function handleNoClick() {
     const noButton = document.querySelector('.no-button');
@@ -74,17 +75,15 @@ function handleNoClick() {
     
     if (messageIndex < messages.length) {
         noButton.textContent = messages[messageIndex];
-        
-        // Solo aumentar significativamente el tamaño en el último mensaje
-        if (messageIndex === messages.length - 1) {
-            yesButton.style.fontSize = `${parseFloat(window.getComputedStyle(yesButton).fontSize) * 2}px`;
-        } else {
-            // Aumento pequeño para los mensajes anteriores
-            yesButton.style.fontSize = `${parseFloat(window.getComputedStyle(yesButton).fontSize) * 1.1}px`;
-        }
-        
         messageIndex++;
     }
+    
+    clickCount++;
+    
+    // Crecimiento exponencial del botón Si hasta abarcar toda la pantalla en el click 10
+    const growthFactor = Math.pow(2, clickCount / 2); // Crecimiento exponencial
+    yesButton.style.fontSize = `${1.5 * growthFactor}em`;
+    yesButton.style.padding = `${10 * growthFactor}px ${20 * growthFactor}px`;
 }
 
 function handleYesClick() {
