@@ -80,8 +80,9 @@ function handleNoClick() {
     
     clickCount++;
     
-    // Crecimiento exponencial desde el primer click
-    const growthFactor = Math.pow(2.5, clickCount); // Crecimiento exponencial fuerte
+    // Crecimiento exponencial durante todos los clicks
+    // En el click 10 (último mensaje), ya abarcará toda la pantalla
+    const growthFactor = Math.pow(1.5, clickCount);
     yesButton.style.fontSize = `${1.5 * growthFactor}em`;
     yesButton.style.padding = `${10 * growthFactor}px ${20 * growthFactor}px`;
 }
