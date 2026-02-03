@@ -62,8 +62,8 @@ const messages = [
     "Si Dices que no se muere bts...",
     "Chofiii piensalo bien...",
     "Te pago por favor...",
-    "Okey,ya no insistire...",
-    "Broma, solo di que siii😩😭! ❤️"
+    "Okey, ya no insistire...",
+    "Es broma, solo di que siii😩😭! ❤️"
 ];
 
 let messageIndex = 0;
@@ -72,9 +72,16 @@ function handleNoClick() {
     const noButton = document.querySelector('.no-button');
     const yesButton = document.querySelector('.yes-button');
     noButton.textContent = messages[messageIndex];
+    
+    // Solo aumentar significativamente el tamaño en el último mensaje
+    if (messageIndex === messages.length - 1) {
+        yesButton.style.fontSize = `${parseFloat(window.getComputedStyle(yesButton).fontSize) * 2}px`;
+    } else {
+        // Aumento pequeño para los mensajes anteriores
+        yesButton.style.fontSize = `${parseFloat(window.getComputedStyle(yesButton).fontSize) * 1.1}px`;
+    }
+    
     messageIndex = (messageIndex + 1) % messages.length;
-    const currentSize = parseFloat(window.getComputedStyle(yesButton).fontSize);
-    yesButton.style.fontSize = `${currentSize * 1.5}px`;
 }
 
 function handleYesClick() {
