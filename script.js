@@ -80,11 +80,19 @@ function handleNoClick() {
     
     clickCount++;
     
-    // Crecimiento exponencial durante todos los clicks
-    // En el click 10 (último mensaje), ya abarcará toda la pantalla
-    const growthFactor = Math.pow(1.35, clickCount);
-    yesButton.style.fontSize = `${1.5 * growthFactor}em`;
-    yesButton.style.padding = `${10 * growthFactor}px ${20 * growthFactor}px`;
+    // Crecimiento moderado mientras se muestran los 10 mensajes
+    // Después de los 10 mensajes, crecimiento exponencial fuerte para abarcar toda la pantalla
+    if (clickCount > messages.length) {
+        // Después del último mensaje: crecimiento fuerte para abarcar toda la pantalla
+        const growthFactor = Math.pow(2.5, clickCount - messages.length);
+        yesButton.style.fontSize = `${1.5 * growthFactor}em`;
+        yesButton.style.padding = `${10 * growthFactor}px ${20 * growthFactor}px`;
+    } else {
+        // Mientras se muestran los mensajes: crecimiento moderado
+        const growthFactor = Math.pow(1.35, clickCount);
+        yesButton.style.fontSize = `${1.5 * growthFactor}em`;
+        yesButton.style.padding = `${10 * growthFactor}px ${20 * growthFactor}px`;
+    }
 }
 
 function handleYesClick() {
