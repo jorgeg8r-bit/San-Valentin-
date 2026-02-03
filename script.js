@@ -68,26 +68,41 @@ const messages = [
 
 let messageIndex = 0;
 let clickCount = 0;
+let lastMessageShown = false;
 
 function handleNoClick() {
     const noButton = document.querySelector('.no-button');
     const yesButton = document.querySelector('.yes-button');
     
+    // Si el último mensaje ya fue mostrado, expandir el botón Sí a toda la pantalla
+    if (lastMessageShown) {
+        yesButton.style.position = 'fixed';
+        yesButton.style.top = '0';
+        yesButton.style.left = '0';
+        yesButton.style.width = '100vw';
+        yesButton.style.height = '100vh';
+        yesButton.style.fontSize = '10em';
+        yesButton.style.padding = '0';
+        yesButton.style.border = 'none';
+        yesButton.style.cursor = 'pointer';
+        yesButton.style.zIndex = '9999';
+        return;
+    }
+    
     if (messageIndex < messages.length) {
         noButton.textContent = messages[messageIndex];
         messageIndex++;
+        
+        // Si es el último mensaje, marcar que fue mostrado
+        if (messageIndex === messages.length) {
+            lastMessageShown = true;
+        }
     }
     
     clickCount++;
     
     // Crecimiento moderado mientras se muestran los 10 mensajes
-    // Después de los 10 mensajes, crecimiento exponencial fuerte para abarcar toda la pantalla
-    if (clickCount > messages.length) {
-        // Después del último mensaje: crecimiento fuerte para abarcar toda la pantalla
-        const growthFactor = Math.pow(2.5, clickCount - messages.length);
-        yesButton.style.fontSize = `${1.5 * growthFactor}em`;
-        yesButton.style.padding = `${10 * growthFactor}px ${20 * growthFactor}px`;
-    } else {
+    if (clickCount <= messages.length) {
         // Mientras se muestran los mensajes: crecimiento moderado
         const growthFactor = Math.pow(1.35, clickCount);
         yesButton.style.fontSize = `${1.5 * growthFactor}em`;
